@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>暖家生活馆 · 治愈系家居好物</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- 头部导航 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <span class="logo-icon">🏠</span>
+                    <span>暖家生活馆</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" class="active" data-page="home">首页</a></li>
+                    <li><a href="#" data-page="cart">购物车 <span id="cartCount" class="cart-badge">0</span></a></li>
+                    <li><a href="#" data-page="profile">我的</a></li>
+                </ul>
+                <div class="user-info" id="userInfo">
+                    <span id="userName">游客</span>
+                    <button class="btn-login" id="loginBtn">登录</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主内容区域 -->
+    <main id="app">
+        <!-- 首页内容会动态加载到这里 -->
+    </main>
+
+    <!-- 商品详情页面（默认隐藏） -->
+    <div id="productDetailPage" style="display: none;">
+        <div class="container">
+            <div class="product-detail-container" id="productDetailContainer">
+                <!-- 详情内容动态加载 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 结算页面（默认隐藏） -->
+    <div id="checkoutPage" style="display: none;">
+        <div class="container">
+            <div class="checkout-container">
+                <div class="checkout-header">
+                    <button id="backToCartBtn" class="back-btn">← 返回购物车</button>
+                    <h2>🎁 填写订单信息</h2>
+                </div>
+
+                <div class="checkout-content">
+                    <div class="checkout-left">
+                        <div class="checkout-section">
+                            <h3>收货信息</h3>
+                            <form id="addressForm">
+                                <input type="text" id="receiverName" placeholder="收货人姓名" required>
+                                <input type="tel" id="receiverPhone" placeholder="手机号码" required>
+                                <input type="text" id="receiverAddress" placeholder="详细地址" required>
+                            </form>
+                        </div>
+
+                        <div class="checkout-section">
+                            <h3>配送方式</h3>
+                            <label><input type="radio" name="delivery" value="快递配送" checked> 快递配送 (¥8)</label>
+                            <label><input type="radio" name="delivery" value="同城闪送"> 同城闪送 (¥15)</label>
+                            <label><input type="radio" name="delivery" value="到店自提"> 到店自提 (免费)</label>
+                        </div>
+
+                        <div class="checkout-section">
+                            <h3>支付方式</h3>
+                            <label><input type="radio" name="payment" value="微信支付" checked> 微信支付</label>
+                            <label><input type="radio" name="payment" value="支付宝"> 支付宝</label>
+                            <label><input type="radio" name="payment" value="银行卡"> 银行卡</label>
+                        </div>
+                    </div>
+
+                    <div class="checkout-right">
+                        <div class="order-summary">
+                            <h3>订单明细</h3>
+                            <div id="checkoutItemsList"></div>
+                            <div class="order-row">
+                                <span>商品总额</span>
+                                <span id="subtotal">¥0</span>
+                            </div>
+                            <div class="order-row">
+                                <span>运费</span>
+                                <span id="deliveryFee">¥8</span>
+                            </div>
+                            <div class="order-row total-row">
+                                <span>实付金额</span>
+                                <span id="totalAmount">¥0</span>
+                            </div>
+                            <button id="submitOrderBtn" class="submit-order-btn">提交订单</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>❤️ 暖家生活馆 · 让家更温暖 | 学号：24215220101 姓名：王素婷</p>
+            <p class="footer-small">© 2024 暖家生活馆 | 治愈系家居购物网站</p>
+        </div>
+    </footer>
+
+    <!-- 登录弹窗 -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>登录 暖家生活馆</h2>
+            <p class="modal-desc">用温暖的心情，挑选暖心好物</p>
+            <form id="loginForm">
+                <input type="text" placeholder="手机号 / 昵称" id="loginAccount" required>
+                <input type="password" placeholder="密码" id="loginPassword" required>
+                <button type="submit" class="btn-primary">登 录</button>
+            </form>
+            <p class="modal-footer">还没有账号？ <a href="#" id="showRegister">立即注册</a></p>
+        </div>
+    </div>
+
+    <!-- 注册弹窗 -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>注册 暖家生活馆</h2>
+            <p class="modal-desc">加入我们，开启温暖生活</p>
+            <form id="registerForm">
+                <input type="text" placeholder="昵称" id="regName" required>
+                <input type="tel" placeholder="手机号（11位）" id="regPhone" required>
+                <input type="password" placeholder="密码（至少6位）" id="regPassword" required>
+                <button type="submit" class="btn-primary">注 册</button>
+            </form>
+            <p class="modal-footer">已有账号？ <a href="#" id="showLogin">去登录</a></p>
+        </div>
+    </div>
+
+    <!-- 扫码支付弹窗 -->
+    <div id="payModal" class="modal">
+        <div class="modal-content pay-modal">
+            <span class="close" id="closePayModal">&times;</span>
+            <h2>💳 扫码支付</h2>
+            <p class="modal-desc">请使用微信/支付宝扫描下方二维码完成支付</p>
+            <div class="qrcode-container">
+                <img id="qrcodeImage" src="images/qrcode.jpg" alt="支付二维码"
+                    onerror="this.src='https://picsum.photos/id/0/200/200'">
+            </div>
+            <p class="pay-tip">支付完成后，请点击「我已支付」</p>
+            <div class="pay-buttons">
+                <button class="btn-pay-complete" id="payCompleteBtn">✓ 我已支付</button>
+                <button class="btn-pay-cancel" id="payCancelBtn">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 回到顶部按钮 -->
+    <button id="backToTopBtn" class="back-to-top" title="回到顶部">↑</button>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
